@@ -1,0 +1,86 @@
+{
+  "mlflow_experiment_name": "<EXPERIMENT NAME>",
+  "mlflow_uri": "<MLFLOW URI>",
+  "exp_type": "contrastive_eval",
+  "sweep_params": {},
+  "contrastive_mlflow_exp_names": ["<MLFLOW EXP NAME 1>"],
+  "increment_seeds": false,
+  "trainer_name": "basic",
+  "do_train": true,
+  "do_val": true,
+  "do_test": true,
+  "train_dataset_name": "<DATASET NAME>",
+  "train_dataset_args": {
+    "dataset_path": "<DATASET PATH>",
+    "include_labels": "true",
+    "split": "train",
+    "sub_sample_frac": 0.01
+  },
+  "val_dataset_name": "<DATASET NAME>",
+  "val_dataset_args": {
+    "dataset_path": "<DATASET PATH>",
+    "include_labels": "true",
+    "split": "val"
+  },
+  "test_dataset_name": "<DATASET NAME>",
+  "test_dataset_args": {
+    "dataset_path": "<DATASET PATH>",
+    "include_labels": "true",
+    "split": "test"
+  },
+  "model_name": "EncoderClassifierModel",
+  "model_args": {
+    "encoder_name": "CNNEncoder",
+    "freeze_encoder": false,
+    "encoder_args": {
+      "input_dim": 240,
+      "dropout_prob": 0,
+      "kernel_size": 7,
+      "stride": 1,
+      "output_dim": 64
+    },
+    "classifier_name": "LinearNN",
+    "classifier_args": {
+      "output_dim": 1
+    }
+  },
+  "train_args": {
+    "opt_args": {
+      "batch_size": 32,
+      "optimizer_type": "Adam",
+      "weight_decay": 0.01,
+      "learning_rate": 0.0001,
+      "adam_beta1": 0.9,
+      "adam_beta2": 0.999,
+      "adam_epsilon": 1e-08,
+      "load_best_model_at_end": true,
+      "best_metric_data": "val",
+      "best_metric": "loss",
+      "greater_is_better": false,
+      "max_epochs": 200,
+      "apply_early_stopping": true,
+      "es_threshold": 0,
+      "es_patience": 15
+    },
+    "loss_args": {
+      "loss_fn_name": "binary_cross_entropy"
+    },
+    "log_args": {
+      "verbose": false,
+      "output_dir": "<OUTPUT PATH>",
+      "save_best_model": true,
+      "save_last_model": true
+    },
+    "seed": 0,
+    "eval_args": {
+      "metrics": ["accuracy", "AUC", "cross_entropy", "confusion_matrix"],
+      "batch_size": 256,
+      "eval_epochs": 1,
+      "splits": ["train", "val"]
+    }
+  },
+  "multi_process_args": {
+    "num_workers": 4,
+    "apply_data_parallel": false
+  }
+}

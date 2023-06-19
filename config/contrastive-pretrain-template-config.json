@@ -1,0 +1,174 @@
+{
+  "mlflow_experiment_name": "<EXPERIMENT NAME>",
+  "mlflow_uri": "<MLFLOW URI>",
+  "exp_type": "sweep",
+  "sweep_params": {
+    "train_args": {
+      "seed": [0, 1, 2, 3, 4]
+    }
+  },
+  "split_path": "<PATH TO DATASET SPLIT FILE>",
+  "trainer_name": "basic",
+  "do_train": true,
+  "do_val": false,
+  "do_test": false,
+  "train_dataset_name": "<DATASET NAME>",
+  "train_dataset_args": {
+    "dataset_path": "<DATASET PATH>",
+    "include_labels": true,
+    "data_views": {
+      "x_1": {
+        "apply_transform": true
+      },
+      "x_2": {
+        "apply_transform": true
+      }
+    },
+    "data_transform_names": [
+      "AmplitudeWarpingStochastic",
+      "BandpassFilterStochastic",
+      "BandstopFilterStochastic",
+      "ConstantAmplitudeScalingStochastic",
+      "GaussianNoiseStochastic",
+      "HighFrequencyNoiseStochastic",
+      "JumpArtifactStochastic",
+      "LooseSensorArtifactStochastic",
+      "LowPassFilterStochastic",
+      "PermuteStochastic",
+      "TemporalCutoutStochastic",
+      "TimeWarpingStochastic",
+      "TonicAmplitudeWarpingStochastic",
+      "TonicConstantAmplitudeScalingStochastic",
+      "TimeShiftStochastic",
+      "HighPassFilterStochastic",
+      "Flip"
+    ],
+    "data_transform_args": {
+      "stochastic_choice": true,
+      "n_transforms": 1,
+      "AmplitudeWarpingStochastic": {
+        "sigma_min": 0.01,
+        "sigma_max": 0.05,
+        "knot_min": 0,
+        "knot_max": 4
+      },
+      "BandpassFilterStochastic": {
+        "keep_freq_min": 0.05,
+        "keep_freq_max": 0.25
+      },
+      "BandstopFilterStochastic": {
+        "remove_freq_min": 0.75,
+        "remove_freq_max": 1
+      },
+      "ConstantAmplitudeScalingStochastic": {
+        "scale_min": 0.25,
+        "scale_max": 2
+      },
+      "GaussianNoiseStochastic": {
+        "sigma_scale_min": 0.0,
+        "sigma_scale_max": 0.5
+      },
+      "HighFrequencyNoiseStochastic": {
+        "sigma_scale_min": 0.1,
+        "sigma_scale_max": 1.0
+      },
+      "JumpArtifactStochastic": {
+        "shift_factor_min": 0.01,
+        "shift_factor_max": 0.2
+      },
+      "LooseSensorArtifactStochastic": {
+        "width_min": 40,
+        "width_max": 80
+      },
+      "LowPassFilterStochastic": {
+        "highcut_hz_min": 0.25,
+        "highcut_hz_max": 1.0
+      },
+      "PermuteStochastic": {
+        "n_splits_max": 6
+      },
+      "TemporalCutoutStochastic": {
+        "cutout_size_min": 20,
+        "cutout_size_max": 100
+      },
+      "TimeWarpingStochastic": {
+        "sigma_min": 0.01,
+        "sigma_max": 0.1,
+        "knot_min": 1,
+        "knot_max": 4
+      },
+      "TonicAmplitudeWarpingStochastic": {
+        "sigma_min": 0.01,
+        "sigma_max": 0.05,
+        "knot_min": 0,
+        "knot_max": 4
+      },
+      "TonicConstantAmplitudeScalingStochastic": {
+        "tonic_scale_factor_min": 0.25,
+        "tonic_scale_factor_max": 2.0
+      },
+      "TimeShiftStochastic": {
+        "shift_len_min": 60,
+        "shift_len_max": 240
+      },
+      "HighPassFilterStochastic": {
+        "lowcut_hz_min": 0.05,
+        "lowcut_hz_max": 0.25
+      }
+    }
+  },
+  "model_name": "ContrastiveModel",
+  "model_args": {
+    "encoder_name": "CNNEncoder",
+    "encoder_args": {
+      "input_dim": 240,
+      "dropout_prob": 0.1,
+      "kernel_size": 7,
+      "stride": 1,
+      "output_dim": 64
+    },
+    "transform_head_name": "LinearNN",
+    "transform_head_args": {
+      "output_dim": 32
+    }
+  },
+  "train_args": {
+    "opt_args": {
+      "batch_size": 256,
+      "optimizer_type": "Adam",
+      "learning_rate": 0.001,
+      "weight_decay": 0.01,
+      "adam_beta1": 0.9,
+      "adam_beta2": 0.999,
+      "adam_epsilon": 1e-08,
+      "load_best_model_at_end": true,
+      "best_metric_data": "train",
+      "best_metric": "loss",
+      "greater_is_better": false,
+      "max_epochs": 400,
+      "apply_early_stopping": true,
+      "es_threshold": 0,
+      "es_patience": 15
+    },
+    "loss_args": {
+      "loss_fn_name": "NCE",
+      "temperature": 0.1
+    },
+    "log_args": {
+      "verbose": false,
+      "output_dir": "<OUTPUT PATH>",
+      "save_best_model": true,
+      "save_last_model": true
+    },
+    "seed": 0,
+    "eval_args": {
+      "batch_size": 256,
+      "eval_epochs": 401,
+      "splits": ["train", "val"]
+    }
+  },
+  "multi_process_args": {
+    "num_workers": 4,
+    "apply_data_parallel": false
+  }
+}
