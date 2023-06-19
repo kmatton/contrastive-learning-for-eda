@@ -4,4 +4,5 @@ Code from [Contrastive Learning of Electrodermal Activity for Stress Detection](
 
 ## Getting Started
 ### Data Augmentations
-### Model Training
+### Contrastive Pre-training
+### Model Evaluation
