@@ -3,12 +3,13 @@
 Code from [Contrastive Learning of Electrodermal Activity for Stress Detection](https://drive.google.com/file/d/19zVyHcHshMA4dGPCL_R_bcVAwxNb-QAk/view).
 
 ## Getting Started
-* TODO: add information on requirements.
-* TODO: add information on dataset creation, including creating dataset split file
+* All required Python libraries are in the ``requirements.txt`` file.
 ### Dataset Preparation
+* TODO: add additional information on dataset creation, including creating dataset split file
 #### Using Your Own Data
 To apply this code to your own dataset, create a new dataset class, following the examples in the ``datasets`` folder (e.g., ``datasets/wesad_dataset.py``). Then add your new dataset class as an option in the ``load_data`` function of the ``ExpRunner`` class in ``run_exp.py``. Make sure to adjust your config files (see below) to indicate this dataset class.
 ### Data Augmentations
+The implementations of all data augmentations are in the ``data_transforms/transform_data.py`` file.
 ### Contrastive Pre-training
 1. Create config, following template in ``config/contrastive-pretrain-template-config.json``. You need to edit the following entries:
    * `mlflow_experiment_name`: Prefix to use when naming mlflow experiment.
