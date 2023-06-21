@@ -3,9 +3,13 @@
 Code from [Contrastive Learning of Electrodermal Activity for Stress Detection](https://drive.google.com/file/d/19zVyHcHshMA4dGPCL_R_bcVAwxNb-QAk/view).
 
 ## Getting Started
-* TODO: add information on requirements.
-* TODO: add information on dataset creation, including creating dataset split file
+* All required Python libraries are in the ``requirements.txt`` file.
+### Dataset Preparation
+* TODO: add additional information on dataset creation, including creating dataset split file
+#### Using Your Own Data
+To apply this code to your own dataset, create a new dataset class, following the examples in the ``datasets`` folder (e.g., ``datasets/wesad_dataset.py``). Then add your new dataset class as an option in the ``load_data`` function of the ``ExpRunner`` class in ``run_exp.py``. Make sure to adjust your config files (see below) to indicate this dataset class.
 ### Data Augmentations
+The implementations of all data augmentations are in the ``data_transforms/transform_data.py`` file.
 ### Contrastive Pre-training
 1. Create config, following template in ``config/contrastive-pretrain-template-config.json``. You need to edit the following entries:
    * `mlflow_experiment_name`: Prefix to use when naming mlflow experiment.
@@ -26,4 +30,5 @@ Code from [Contrastive Learning of Electrodermal Activity for Stress Detection](
    * `<train/val/test>_dataset_args: dataset_name`: Name of dataset class to use for training/validation/testing.
    * `log_args: output_dir`: Path to output directory.
    * By default, we simulate the sparse label setting by sub-sampling a random 1\% of the training data to used for supervised training. If you want to change this parameter, you can do so by adjusting the `train_dataset_args: sub_sample_frac` argument.
+   * By default, we evaluate using the fine-tuning scenario. To instead perform a linear evaluation (encoder weights fixed), change the `model_args: freeze_encoder` argument from ``false`` to ``true``.
 2. Run `python main.py --config_path=<PATH TO CONFIG>`
