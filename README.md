@@ -26,4 +26,5 @@ Code from [Contrastive Learning of Electrodermal Activity for Stress Detection](
    * `<train/val/test>_dataset_args: dataset_name`: Name of dataset class to use for training/validation/testing.
    * `log_args: output_dir`: Path to output directory.
    * By default, we simulate the sparse label setting by sub-sampling a random 1\% of the training data to used for supervised training. If you want to change this parameter, you can do so by adjusting the `train_dataset_args: sub_sample_frac` argument.
+   * By default, we evaluate using the fine-tuning scenario. To instead perform a linear evaluation (encoder weights fixed), change the `model_args: freeze_encoder` argument from ``false`` to ``true``.
 2. Run `python main.py --config_path=<PATH TO CONFIG>`
