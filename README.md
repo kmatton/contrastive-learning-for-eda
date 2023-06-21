@@ -5,6 +5,9 @@ Code from [Contrastive Learning of Electrodermal Activity for Stress Detection](
 ## Getting Started
 * TODO: add information on requirements.
 * TODO: add information on dataset creation, including creating dataset split file
+### Dataset Preparation
+#### Using Your Own Data
+To apply this code to your own dataset, create a new dataset class, following the examples in the ``datasets`` folder (e.g., ``datasets/wesad_dataset.py``). Then add your new dataset class as an option in the ``load_data`` function of the ``ExpRunner`` class in ``run_exp.py``. Make sure to adjust your config files (see below) to indicate this dataset class.
 ### Data Augmentations
 ### Contrastive Pre-training
 1. Create config, following template in ``config/contrastive-pretrain-template-config.json``. You need to edit the following entries:
