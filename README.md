@@ -4,13 +4,13 @@ Code from [Contrastive Learning of Electrodermal Activity for Stress Detection](
 
 ## Getting Started
 * All required Python libraries are in the ``requirements.txt`` file.
-### Dataset Preparation
+## Dataset Preparation
 * TODO: add additional information on dataset creation, including creating dataset split file
-#### Using Your Own Data
+### Using Your Own Data
 To apply this code to your own dataset, you need to create a new dataset class, following the examples in the ``datasets`` folder (e.g., ``datasets/wesad_dataset.py``). Then add your new dataset class as an option in the ``load_data`` function of the ``ExpRunner`` class in ``run_exp.py``. Make sure to adjust your config files (see below) to indicate this dataset class.
-### Data Augmentations
+## Data Augmentations
 The implementations of all data augmentations are in the ``data_transforms/transform_data.py`` file.
-### Contrastive Pre-training
+## Contrastive Pre-training
 1. Create config, following template in ``config/contrastive-pretrain-template-config.json``. You need to edit the following entries:
    * `mlflow_experiment_name`: Prefix to use when naming mlflow experiment.
    * `mlflow_uri`: URI for mlflow remote tracking.
@@ -20,7 +20,7 @@ The implementations of all data augmentations are in the ``data_transforms/trans
    * `log_args:output_dir`: Path to output directory.
    * By default, all data augmentations are used. If you want to run the pretraining with just a subset of augmentations, edit the list of data augmentations included in the ``train_dataset_args: data_transform_names`` argument.
 2. Run `python main.py --config_path=<PATH TO CONFIG>`
-### Model Evaluation
+## Model Evaluation
 1. Create config, following template in ``config/eval-template-config.json``. You need to edit the following entries:
    * `mlflow_experiment_name`: Prefix to use when naming mlflow experiment.
    * `mlflow_uri`: URI for mlflow remote tracking.
