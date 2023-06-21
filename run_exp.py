@@ -13,10 +13,8 @@ import torch
 import mlflow
 
 from args.multi_process_args import MultiProcessArgs
-from datasets.affective_road_dataset import AffectiveRoadEDADataset
 from datasets.wesad_dataset import WESADDataset
 from datasets.verbio_dataset import VerBioDataset
-from datasets.marting_dataset import MartinGDataset
 from modeling.training.sklearn_trainer import SKLearnTrainer
 from modeling.training.trainer import Trainer
 from models.classifier_model import ClassifierModel
@@ -116,14 +114,10 @@ class ExpRunner:
         split_file = None
         if "split_file" in self.arguments.keys():
             split_file = self.arguments["split_file"]
-        if self.arguments[f"{data_split}_dataset_name"] == "AffectiveRoadEDADataset":
-            return AffectiveRoadEDADataset(**self.arguments[f"{data_split}_dataset_args"], split_file=split_file)
-        elif self.arguments[f"{data_split}_dataset_name"] == "WESADDataset":
+        if self.arguments[f"{data_split}_dataset_name"] == "WESADDataset":
             return WESADDataset(**self.arguments[f"{data_split}_dataset_args"], split_file=split_file)
         elif self.arguments[f"{data_split}_dataset_name"] == "VerBioDataset":
             return VerBioDataset(**self.arguments[f"{data_split}_dataset_args"], split_file=split_file)
-        elif self.arguments[f"{data_split}_dataset_name"] == "MartinGDataset":
-            return MartinGDataset(**self.arguments[f"{data_split}_dataset_args"], split_file=split_file)
         print(f"Unrecognized {data_split} dataset name {self.arguments[f'{data_split}_dataset_name']}")
         print("Exiting...")
         exit(1)
