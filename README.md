@@ -4,17 +4,23 @@ Code from [Contrastive Learning of Electrodermal Activity for Stress Detection](
 
 ### Getting Started
 * All required Python libraries are in the ``requirements.txt`` file.
+
 ### Dataset Preparation
-* TODO: add additional information on dataset creation, including creating dataset split file
+* TODO: add additional information on dataset pre-processing for WESAD and VERBIO
+
+**Creating train/val/test splits**
+In the experiments in the paper above, we split the dataset into 5 folds by subject and evaluate via leave-N-subjects-out (LNSO) cross-validation. The splits we use for the WESAD and VERBIO datasets are in sub-directories within the ``dataset_splits`` directory of this repo. There is a single file associated with each of the five folds. Each file contains two columns: the first lists the subject IDS and the second lists the split (train/val/test) that examples from that subject belong to for the given fold.
+
 #### Using Your Own Data
-To apply this code to your own dataset, you need to create a new dataset class, following the examples in the ``datasets`` folder (e.g., ``datasets/wesad_dataset.py``). Then add your new dataset class as an option in the ``load_data`` function of the ``ExpRunner`` class in ``run_exp.py``. Make sure to adjust your config files (see below) to indicate this dataset class.
+To apply this code to your own dataset, you need to create a new dataset class, following the examples in the ``datasets`` folder (e.g., ``datasets/wesad_dataset.py``). Then add your new dataset class as an option in the ``load_data`` function of the ``ExpRunner`` class in ``run_exp.py``. Make sure to adjust your config files (see below) to indicate this dataset class. You also will need to specify the train/val/test split(s) that you want to use in your experiments. To do this, create a new sub-directory within the  ``dataset_splits`` directory and include a file for each of the splits you would like to use (e.g., 5 splits if doing 5-fold cross validation). The first line of each file should contain two entries separated by a comma: <SPLIT KEY>,split, where <SPLIT KEY> is the attribute to split based on (e.g., subject_id, example_id). The remaining lines should list each possible value of the split key (e.g., all subject ids) and the split of the dataset (i.e., train, val, or test) that they are assigned to. See the files in ``dataset_splits/WESAD`` for an example.
+
 ### Data Augmentations
 The implementations of all data augmentations are in the ``data_transforms/transform_data.py`` file.
 ### Contrastive Pre-training
 1. Create config, following template in ``config/contrastive-pretrain-template-config.json``. You need to edit the following entries:
    * `mlflow_experiment_name`: Prefix to use when naming mlflow experiment.
    * `mlflow_uri`: URI for mlflow remote tracking.
-   * `split_path`: Path to file specifying train/val/test split.
+   * `split_path`: Path to directory with files that specify the train/val/test split for each fold of the dataset.
    * `train_dataset_args: dataset_path`: Path to dataset for model pretraining.
    * `train_dataset_args: dataset_name`: Name of dataset class to use.
    * `log_args:output_dir`: Path to output directory.
