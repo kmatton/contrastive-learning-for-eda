@@ -9,6 +9,7 @@ Code from [Contrastive Learning of Electrodermal Activity for Stress Detection](
 * TODO: add additional information on dataset pre-processing for WESAD and VERBIO
 
 **Creating train/val/test splits**
+
 In the experiments in the paper above, we split the dataset into 5 folds by subject and evaluate via leave-N-subjects-out (LNSO) cross-validation. The splits we use for the WESAD and VERBIO datasets are in sub-directories within the ``dataset_splits`` directory of this repo. There is a single file associated with each of the five folds. Each file contains two columns: the first lists the subject IDS and the second lists the split (train/val/test) that examples from that subject belong to for the given fold.
 
 #### Using Your Own Data
