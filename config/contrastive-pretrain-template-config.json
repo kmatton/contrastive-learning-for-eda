@@ -7,7 +7,7 @@
       "seed": [0, 1, 2, 3, 4]
     }
   },
-  "split_path": "<PATH TO DATASET SPLIT FILE>",
+  "split_path": "<PATH TO DIRECTORY WITH DATASET SPLIT FILES>",
   "trainer_name": "basic",
   "do_train": true,
   "do_val": false,
