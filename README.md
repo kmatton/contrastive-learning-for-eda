@@ -6,7 +6,10 @@ Code from [Contrastive Learning of Electrodermal Activity for Stress Detection](
 * All required Python libraries are in the ``requirements.txt`` file.
 
 ### Dataset Preparation
-* TODO: add additional information on dataset pre-processing for WESAD and VERBIO
+
+**Processing WESAD & VerBIO datasets**
+
+Code to process the datasets can be found in the `ipynb` notebooks in the `data_processing/` directory. **Note:** you will need to obtain a copy of the datasets from the WESAD and VerBIO teams.
 
 **Creating train/val/test splits**
 
